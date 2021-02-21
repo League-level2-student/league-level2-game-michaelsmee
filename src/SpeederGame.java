@@ -58,7 +58,7 @@ public class SpeederGame{
 			frame.setVisible(true);
 			panel = new GamePanel();
 			frame.add(panel);
-			
+			frame.addKeyListener(panel);
 		}
 
 		void setup() {
