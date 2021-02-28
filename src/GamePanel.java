@@ -19,6 +19,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Font gameFont;
 	Font gameInstructions;
 	Timer frameDraw;
+	Speeder speeder = new Speeder(250,250,50,50);
 
 	GamePanel() {
 		frameDraw = new Timer(1000 / 60, this);
@@ -53,6 +54,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	void drawGameState(Graphics g) {
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, SpeederGame.WIDTH, SpeederGame.HEIGHT);
+		speeder.draw(g);
 	}
 
 	void drawEndState(Graphics g) {
@@ -104,17 +106,29 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			}
 		}
 		if (currentState == GAME) {
-			if (e.getKeyCode() == KeyEvent.VK_UP) {
-				System.out.println("UP");
+			if (e.getKeyCode() == KeyEvent.VK_UP) {			
+				speeder.up();
 			}
-			if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-				System.out.println("DOWN");
+			if (e.getKeyCode() == KeyEvent.VK_DOWN) {		
+				speeder.down();
 			}
-			if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-				System.out.println("LEFT");
+			if (e.getKeyCode() == KeyEvent.VK_LEFT) {	
+				speeder.left();
 			}
 			if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-				System.out.println("RIGHT");
+				speeder.right();
+			}
+			if(speeder.x>800) {
+				speeder.x=0;
+			}
+			if(speeder.x<0) {
+				speeder.x=800; 
+			}
+			if(speeder.y>500) {
+				speeder.y=0;
+			}
+			if(speeder.y<0) {
+				speeder.y=500;
 			}
 		}
 	}
