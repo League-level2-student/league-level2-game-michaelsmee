@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Random;
 
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -19,18 +20,21 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Font gameFont;
 	Font gameInstructions;
 	Timer frameDraw;
-	Speeder speeder = new Speeder(250,250,50,50);
+	Speeder speeder = new Speeder(250, 250, 50, 50);
+	int upperPipeHeight;
+	int pipeGap = 300;
+	int lowerY = upperPipeHeight + pipeGap;
+	int score;
+	int barrierX = 800;
+	int barrierY = 0;
 
 	GamePanel() {
 		frameDraw = new Timer(1000 / 60, this);
 		frameDraw.start();
-		titleFont =  new Font("Arial", Font.PLAIN, 30);
-		gameFont =  new Font("Arial", Font.PLAIN, 30);
-		gameInstructions =  new Font("Arial", Font.PLAIN, 30);
+		titleFont = new Font("Arial", Font.PLAIN, 30);
+		gameFont = new Font("Arial", Font.PLAIN, 30);
+		gameInstructions = new Font("Arial", Font.PLAIN, 30);
 	}
-
-
-	
 
 	void updateMenuState() {
 	}
@@ -55,6 +59,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, SpeederGame.WIDTH, SpeederGame.HEIGHT);
 		speeder.draw(g);
+		g.setColor(Color.YELLOW);
+		g.drawString("Wave "+ score, 30, 30);
+		barrier(g);
+		teleportBarrier();
 	}
 
 	void drawEndState(Graphics g) {
@@ -71,13 +79,13 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public void paintComponent(Graphics g) {
 		if (currentState == MENU) {
 			drawMenuState(g);
-			
+
 		} else if (currentState == GAME) {
 			drawGameState(g);
-			
+
 		} else if (currentState == END) {
 			drawEndState(g);
-			
+
 		}
 	}
 
@@ -106,29 +114,29 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			}
 		}
 		if (currentState == GAME) {
-			if (e.getKeyCode() == KeyEvent.VK_UP) {			
+			if (e.getKeyCode() == KeyEvent.VK_UP) {
 				speeder.up();
 			}
-			if (e.getKeyCode() == KeyEvent.VK_DOWN) {		
+			if (e.getKeyCode() == KeyEvent.VK_DOWN) {
 				speeder.down();
 			}
-			if (e.getKeyCode() == KeyEvent.VK_LEFT) {	
+			if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 				speeder.left();
 			}
 			if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 				speeder.right();
 			}
-			if(speeder.x>800) {
-				speeder.x=0;
+			if (speeder.x > 800) {
+				speeder.x = 800;
 			}
-			if(speeder.x<0) {
-				speeder.x=800; 
+			if (speeder.x < 0) {
+				speeder.x = 0;
 			}
-			if(speeder.y>500) {
-				speeder.y=0;
+			if (speeder.y > 450) {
+				speeder.y = 450;
 			}
-			if(speeder.y<0) {
-				speeder.y=500;
+			if (speeder.y < 0) {
+				speeder.y = 0;
 			}
 		}
 	}
@@ -145,4 +153,33 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	}
 
+	void barrier(Graphics g) {
+		
+		g.setColor(Color.YELLOW);
+		g.fillRect(barrierX, 450, 20, lowerY);
+		g.fillRect(barrierX, 0, 20, upperPipeHeight);
+		barrierX--;
+	}
+
+	void teleportBarrier() {
+		Random rand = new Random();
+		if (barrierX == 0) {
+			barrierX = SpeederGame.WIDTH;
+			upperPipeHeight = rand.nextInt(300) + 100;
+			lowerY = upperPipeHeight + pipeGap;
+			score += 1;
+		}
+
+	}
+/*
+	boolean intersectsPipes() {
+		if (y < upperPipeHeight && 500 > x && 500 < (x + 50)) {
+			return true;
+		} else if (y > lowerY && 500 > x && 500 < (x + 50)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+*/
 }
