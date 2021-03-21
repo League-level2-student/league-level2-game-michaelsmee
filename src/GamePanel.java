@@ -22,7 +22,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Timer frameDraw;
 	Speeder speeder = new Speeder(250, 250, 50, 50);
 	int upperPipeHeight = 100;
-	int pipeGap = 300;
+	int pipeGap = 200;
 	int lowerY = upperPipeHeight + pipeGap;
 	int score;
 	int barrierX = 800;
@@ -40,6 +40,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	void updateGameState() {
+		intersectsPipes();
 	}
 
 	void updateEndState() {
@@ -105,9 +106,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
+		System.out.println(currentState);
 		// TODO Auto-generated method stub
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 			if (currentState == END) {
+				speeder = new Speeder(250, 750, 50, 50);
 				currentState = MENU;
 			} else {
 				currentState++;
@@ -165,7 +168,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		Random rand = new Random();
 		if (barrierX == 0) {
 			barrierX = SpeederGame.WIDTH;
-			upperPipeHeight = rand.nextInt(75) + 100;
+			upperPipeHeight = rand.nextInt(200) + 100;
 			lowerY = barrierX-upperPipeHeight- pipeGap;
 			score += 1;
 		}
@@ -173,10 +176,14 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	void intersectsPipes() {
-		if (barrierY < upperPipeHeight && 500 > barrierX && 500 < (speeder.x + 50)) {
+		if (speeder.y < upperPipeHeight && speeder.x > barrierX && speeder.x < (barrierX + 20)) {
+			//System.out.println(" if dead");
 			currentState = END;
-		} else if (barrierY > lowerY && 800 > barrierX && 800 < (speeder.x + 50)) {
+			
+		} else if (speeder.y+50 > lowerY && speeder.x > barrierX && speeder.x < (barrierX + 20)) {
+			//System.out.println(" else if dead");
 			currentState = END;
+			
 		} 
 			
 		}
