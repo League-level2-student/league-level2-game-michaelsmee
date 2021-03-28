@@ -72,7 +72,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.setColor(Color.YELLOW);
 		g.setFont(titleFont);
 		g.drawString("Game Over", 350, 250);
-		g.drawString("You kill _ many enimies", 350, 300);
+		g.drawString("Waves survived: "+score, 350, 300);
 		g.drawString("Press ENTER to restart", 350, 400);
 	}
 
@@ -86,8 +86,12 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 		} else if (currentState == END) {
 			drawEndState(g);
-
+			score = 0;
+			speeder = new Speeder(250, 250, 50, 50);
+			barrier(g);
+			
 		}
+		
 	}
 
 	@Override
@@ -180,9 +184,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			//System.out.println(" if dead");
 			currentState = END;
 			
+			
 		} else if (speeder.y+50 > lowerY && speeder.x > barrierX && speeder.x < (barrierX + 20)) {
 			//System.out.println(" else if dead");
 			currentState = END;
+			
 			
 		} 
 			
