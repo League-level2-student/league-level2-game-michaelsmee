@@ -21,9 +21,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Font gameInstructions;
 	Timer frameDraw;
 	Speeder speeder = new Speeder(250, 250, 50, 50);
-	int upperPipeHeight = 100;
-	int pipeGap = 200;
-	int lowerY = upperPipeHeight + pipeGap;
+	int upperHeight = 100;
+	int Gap = 200;
+	int lowerY = upperHeight + Gap;
 	int score;
 	int barrierX = 800;
 	int barrierY = 0;
@@ -40,7 +40,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	void updateGameState() {
-		intersectsPipes();
+		intersectss();
 	}
 
 	void updateEndState() {
@@ -163,8 +163,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	void barrier(Graphics g) {
 		
 		g.setColor(Color.YELLOW);
-		g.fillRect(barrierX, upperPipeHeight+pipeGap, 20, lowerY);
-		g.fillRect(barrierX, 0, 20, upperPipeHeight);
+		g.fillRect(barrierX, lowerY, 20, 500-lowerY);
+		g.fillRect(barrierX, 0, 20, upperHeight);
 		barrierX--;
 	}
 
@@ -172,15 +172,15 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		Random rand = new Random();
 		if (barrierX == 0) {
 			barrierX = SpeederGame.WIDTH;
-			upperPipeHeight = rand.nextInt(200) + 100;
-			lowerY = barrierX-upperPipeHeight- pipeGap;
+			upperHeight = rand.nextInt(200) + 100;
+			lowerY = barrierX-upperHeight- Gap;
 			score += 1;
 		}
 
 	}
 
-	void intersectsPipes() {
-		if (speeder.y < upperPipeHeight && speeder.x > barrierX && speeder.x < (barrierX + 20)) {
+	void intersectss() {
+		if (speeder.y < upperHeight && speeder.x > barrierX && speeder.x < (barrierX + 20)) {
 			//System.out.println(" if dead");
 			currentState = END;
 			
