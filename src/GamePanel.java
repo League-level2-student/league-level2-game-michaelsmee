@@ -55,6 +55,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.drawString("Press Enter to start", 350, 300);
 		g.drawString("Press space for info", 350, 400);
 		barrierX = 750;
+		score = 0;
 	}
 
 	void drawGameState(Graphics g) {
@@ -173,7 +174,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		if (barrierX == 0) {
 			barrierX = SpeederGame.WIDTH;
 			upperHeight = rand.nextInt(200) + 100;
-			lowerY = barrierX-upperHeight- Gap;
+			lowerY = upperHeight + Gap;
 			score += 1;
 		}
 
