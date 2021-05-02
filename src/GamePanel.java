@@ -5,13 +5,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
 import java.util.Random;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class GamePanel extends JPanel implements ActionListener, KeyListener {
-
+	public static BufferedImage image;
+	public static boolean needImage = true;
+	public static boolean gotImage = false;	
 	final int MENU = 0;
 	final int GAME = 1;
 	final int END = 2;
@@ -34,6 +38,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		titleFont = new Font("Arial", Font.PLAIN, 30);
 		gameFont = new Font("Arial", Font.PLAIN, 30);
 		gameInstructions = new Font("Arial", Font.PLAIN, 30);
+		if (needImage) {
+		    loadImage ("background1.jpg");
+		}
 	}
 
 	void updateMenuState() {
@@ -59,14 +66,35 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	void drawGameState(Graphics g) {
-		g.setColor(Color.BLACK);
-		g.fillRect(0, 0, SpeederGame.WIDTH, SpeederGame.HEIGHT);
-		speeder.draw(g);
-		g.setColor(Color.YELLOW);
-		g.drawString("Wave "+ score, 30, 30);
-		barrier(g);
-		teleportBarrier();
+		if(gotImage) {
+			g.drawImage(image, WIDTH, HEIGHT, null);
+			System.out.println("gotImage");
+		}
+		else {
+			g.setColor(Color.BLACK);
+			g.fillRect(0, 0, SpeederGame.WIDTH, SpeederGame.HEIGHT);
+			System.out.println("Not got image");
+		}
+	
+			speeder.draw(g);
+			g.setColor(Color.YELLOW);
+			g.drawString("Wave "+ score, 30, 30);
+			barrier(g);
+			teleportBarrier();
 	}
+	
+	void loadImage(String imageFile) {
+	    if (needImage) {
+	        try {
+	            image = ImageIO.read(this.getClass().getResourceAsStream(imageFile));
+		    gotImage = true;
+	        } catch (Exception e) {
+	            
+	        }
+	        needImage = false;
+	    }
+	}
+
 
 	void drawEndState(Graphics g) {
 		g.setColor(Color.RED);
