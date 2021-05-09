@@ -39,7 +39,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		gameFont = new Font("Arial", Font.PLAIN, 30);
 		gameInstructions = new Font("Arial", Font.PLAIN, 30);
 		if (needImage) {
-		    loadImage ("background1.jpg");
+		    loadImage ("background4.jpg");
 		}
 	}
 
@@ -191,7 +191,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	void barrier(Graphics g) {
 		
-		g.setColor(Color.YELLOW);
+		g.setColor(Color.GREEN);
 		g.fillRect(barrierX, lowerY, 20, 500-lowerY);
 		g.fillRect(barrierX, 0, 20, upperHeight);
 		barrierX--;
@@ -201,7 +201,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		Random rand = new Random();
 		if (barrierX == 0) {
 			barrierX = SpeederGame.WIDTH;
-			upperHeight = rand.nextInt(200) + 100;
+			upperHeight = rand.nextInt(280);
 			lowerY = upperHeight + Gap;
 			score += 1;
 		}
