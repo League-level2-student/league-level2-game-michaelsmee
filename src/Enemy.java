@@ -1,14 +1,20 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
 
 public class Enemy extends GameObject{
-
+	public static BufferedImage image;
+	public static boolean needImage = true;
+	public static boolean gotImage = false;	
 	public Enemy(int x, int y, int width, int height) {
-		super(image, x, y, width, height);
+		super(x, y, width, height);
 		// TODO Auto-generated constructor stub
 		this.speed=1;
+		if (needImage) {
+		    loadImage ("Enemy2.png");
+		} 
 	}
 	
 	void update() {

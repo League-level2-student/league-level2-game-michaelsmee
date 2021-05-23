@@ -25,6 +25,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Font gameInstructions;
 	Timer frameDraw;
 	Speeder speeder = new Speeder(250, 250, 50, 50);
+	Enemy enemy = new Enemy(100,100,52,20);
 	int upperHeight = 100;
 	int Gap = 200;
 	int lowerY = upperHeight + Gap;
@@ -81,6 +82,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			g.drawString("Wave "+ score, 30, 30);
 			barrier(g);
 			teleportBarrier();
+			
+			enemy.draw(g);
 	}
 	
 	void loadImage(String imageFile) {
