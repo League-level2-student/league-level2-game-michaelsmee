@@ -82,7 +82,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		
 	
 			speeder.draw(g);
-			g.setColor(Color.YELLOW);
+			g.setColor(Color.YELLOW); 
 			g.drawString("Wave "+ score, 30, 30);
 			barrier(g);
 			teleportBarrier();
