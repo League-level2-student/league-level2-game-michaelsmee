@@ -13,7 +13,7 @@ public class Enemy extends GameObject{
 		// TODO Auto-generated constructor stub
 		this.speed=1;
 		if (needImage) {
-		    loadImage ("Enemy2.png");
+		    loadImage ("enemy2.0.png");
 		} 
 	}
 	
@@ -23,8 +23,7 @@ public class Enemy extends GameObject{
 	}
 
 	void draw(Graphics g) {
-		g.setColor(Color.YELLOW);
-		g.fillRect(x, y, width, height);
+
 		if (gotImage) {
 			g.drawImage(image, x, y, width, height, null);
 		} else {

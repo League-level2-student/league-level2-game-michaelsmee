@@ -19,19 +19,22 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	final int MENU = 0;
 	final int GAME = 1;
 	final int END = 2;
+	
 	int currentState = MENU;
 	Font titleFont;
 	Font gameFont;
 	Font gameInstructions;
 	Timer frameDraw;
+	int barrierX = 800;
+	int barrierY = 0;
 	Speeder speeder = new Speeder(250, 250, 50, 50);
-	Enemy enemy = new Enemy(100,100,52,20);
+	Enemy enemy = new Enemy(barrierX,250,15,20);
 	int upperHeight = 100;
 	int Gap = 200;
 	int lowerY = upperHeight + Gap;
 	int score;
-	int barrierX = 800;
-	int barrierY = 0;
+	
+	
 
 	GamePanel() {
 		frameDraw = new Timer(1000 / 60, this);
@@ -198,6 +201,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.fillRect(barrierX, lowerY, 20, 500-lowerY);
 		g.fillRect(barrierX, 0, 20, upperHeight);
 		barrierX--;
+		enemy.update();
 	}
 
 	void teleportBarrier() {
