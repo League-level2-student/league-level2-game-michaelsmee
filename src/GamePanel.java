@@ -79,6 +79,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			g.fillRect(0, 0, SpeederGame.WIDTH, SpeederGame.HEIGHT);
 			System.out.println("Not got image");
 		}
+		
 	
 			speeder.draw(g);
 			g.setColor(Color.YELLOW);
