@@ -17,6 +17,7 @@ public class Enemy extends GameObject{
 		} 
 	}
 	
+	
 	void update() {
 		x-=1;
 		super.update();
