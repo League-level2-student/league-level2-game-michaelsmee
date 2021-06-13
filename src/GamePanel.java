@@ -65,19 +65,20 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.drawString("Welcome", 350, 200);
 		g.drawString("Press Enter to start", 350, 300);
 		g.drawString("Press space for info", 350, 400);
-		barrierX = 750;
+		barrierX = 800;
+		enemy.x = 800;
 		score = 0;
 	}
 
 	void drawGameState(Graphics g) {
 		if(gotImage) {
 			g.drawImage(image, WIDTH, HEIGHT, null);
-			System.out.println("gotImage");
+			//System.out.println("gotImage");
 		}
 		else {
 			g.setColor(Color.BLACK);
 			g.fillRect(0, 0, SpeederGame.WIDTH, SpeederGame.HEIGHT);
-			System.out.println("Not got image");
+			//System.out.println("Not got image");
 		}
 		
 	
@@ -86,6 +87,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			g.drawString("Wave "+ score, 30, 30);
 			barrier(g);
 			teleportBarrier();
+		
 			
 			enemy.draw(g);
 	}
@@ -146,7 +148,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		System.out.println(currentState);
+		//System.out.println(currentState);
 		// TODO Auto-generated method stub
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 			if (currentState == END) {
@@ -212,6 +214,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			upperHeight = rand.nextInt(280);
 			lowerY = upperHeight + Gap;
 			score += 1;
+			enemy.x=SpeederGame.WIDTH;
+			Random ran = new Random();
+			enemy.y=ran.nextInt(150)+upperHeight;
 		}
 
 	}
@@ -227,9 +232,18 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			currentState = END;
 			
 			
-		} 
+		}	
+		
+		
+		}
+	void alienIntersect() {
+		if (speeder.y < upperHeight && speeder.x > barrierX && speeder.x < (barrierX + 20)) {
+			//System.out.println(" if dead");
+			currentState = END;
 			
 		}
+		
+	}
 	
 
 }
