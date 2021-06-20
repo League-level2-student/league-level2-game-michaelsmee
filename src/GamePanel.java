@@ -52,6 +52,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	void updateGameState() {
 		intersectss();
+		enemyIntersect();
 	}
 
 	void updateEndState() {
@@ -236,9 +237,14 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		
 		
 		}
-	void alienIntersect() {
-		if (speeder.y < upperHeight && speeder.x > barrierX && speeder.x < (barrierX + 20)) {
+	void enemyIntersect() {
+		System.out.println("speeder y = " + speeder.y);
+		System.out.println("speeder x = " + speeder.x);
+		System.out.println("enemy y = " + enemy.y);
+		System.out.println("enemy x = " + enemy.x);
+		if (speeder.y > enemy.y && speeder.y < (enemy.y+20) && speeder.x > enemy.x && speeder.x < (enemy.x + 15)) {
 			//System.out.println(" if dead");
+		
 			currentState = END;
 			
 		}
