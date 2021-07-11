@@ -172,6 +172,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 				speeder.right();
 			}
+			if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+				System.out.println("space");
+				speeder.addProjectile(new Projectile(speeder.x, speeder.y, speeder.height,speeder.width));
+			}
 			if (speeder.x > 800) {
 				speeder.x = 800;
 			}
@@ -185,6 +189,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 				speeder.y = 0;
 			}
 		}
+		/*if(e.getKeyCode()==KeyEvent.VK_SPACE) {
+			if(currentState == GAME) {
+			objectManager.addProjectile(speeder.getProjectile());	
+		}*/
 	}
 
 	@Override
@@ -238,12 +246,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		
 		}
 	void enemyIntersect() {
-		System.out.println("speeder y = " + speeder.y);
-		System.out.println("speeder x = " + speeder.x);
-		System.out.println("enemy y = " + enemy.y);
-		System.out.println("enemy x = " + enemy.x);
-		if (speeder.y > enemy.y && speeder.y < (enemy.y+20) && speeder.x > enemy.x && speeder.x < (enemy.x + 15)) {
-			//System.out.println(" if dead");
+		
+		if (enemy.y >= speeder.y && enemy.y <= (speeder.y+speeder.height) && enemy.x >= speeder.x && enemy.x <= (speeder.x+speeder.width)) {
+			System.out.println(" if dead");
 		
 			currentState = END;
 			
