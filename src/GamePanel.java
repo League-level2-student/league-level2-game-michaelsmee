@@ -16,6 +16,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public static BufferedImage image;
 	public static boolean needImage = true;
 	public static boolean gotImage = false;	
+	
 	final int MENU = 0;
 	final int GAME = 1;
 	final int END = 2;
@@ -28,6 +29,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	int barrierX = 800;
 	int barrierY = 0;
 	Speeder speeder = new Speeder(250, 250, 50, 50);
+	ObjectManager objectManager= new ObjectManager(speeder); 
 	Enemy enemy = new Enemy(barrierX,250,15,20);
 	int upperHeight = 100;
 	int Gap = 200;
@@ -53,6 +55,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	void updateGameState() {
 		intersectss();
 		enemyIntersect();
+		objectManager.update();
 	}
 
 	void updateEndState() {
@@ -91,6 +94,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		
 			
 			enemy.draw(g);
+			
+			objectManager.draw(g);
+			//projectiles.get(i).draw(g);
 	}
 	
 	void loadImage(String imageFile) {
@@ -174,7 +180,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			}
 			if (e.getKeyCode() == KeyEvent.VK_SPACE) {
 				System.out.println("space");
-				speeder.addProjectile(new Projectile(speeder.x, speeder.y, speeder.height,speeder.width));
+				objectManager.addProjectile(speeder.getProjectile());
+				//speeder.addProjectile(new Projectile(speeder.x, speeder.y, speeder.height,speeder.width));
 			}
 			if (speeder.x > 800) {
 				speeder.x = 800;
