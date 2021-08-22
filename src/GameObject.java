@@ -4,6 +4,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class GameObject implements ActionListener {
+	 Rectangle collisionBox;
 	 int x;
 	 int y;
 	 int width;
@@ -17,14 +18,14 @@ public GameObject(int x, int y, int width, int height) {
 	this.y = y;
 	this.width = width;
 	this.height = height;
-	//collisionBox = new Rectangle(x,y,width,height);
+	collisionBox = new Rectangle(x,y,width,height);
 	}
 
 
 
 
 void update() {
-	
+	collisionBox.setBounds(x, y, width, height);
 }
 
 

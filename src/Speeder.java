@@ -27,9 +27,7 @@ public class Speeder extends GameObject {
 			g.setColor(Color.PINK);
 			g.drawRect(x, y, width, height);
 			g.drawImage(image, x, y, width, height, null);
-			for(int i =0; i<projectiles.size(); i++) {
-				projectiles.get(i).draw(g);
-			}
+			
 		} else {
 			g.setColor(Color.BLUE);
 			g.fillRect(x, y, width, height);
@@ -68,6 +66,6 @@ public class Speeder extends GameObject {
 	    }
 	}
 	public Projectile getProjectile() {
-		return new Projectile(x+width/2, y, 10, 10);
+		return new Projectile(x+width/2, y+20, 10, 10);
 	}
 }

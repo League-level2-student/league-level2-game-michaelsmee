@@ -24,8 +24,13 @@ public class ObjectManager implements ActionListener {
 		for (int i = 0; i < projectiles.size(); i++) {
 			if (projectiles.get(i).active == false) {
 				projectiles.remove(projectiles.get(i));
+				//System.out.println("projectile removed");
 			}
 		}
+		if(enemy.active == false) {
+				enemy = new Enemy(barrierX,2500,15,20);
+				System.out.println("new enemy created");
+			}
 
 	}
 
@@ -44,10 +49,13 @@ public class ObjectManager implements ActionListener {
 
 			for (int i = 0; i < projectiles.size(); i++) {
 				projectiles.get(i).update();
-				System.out.println(i + " " + projectiles.get(i).x);
+				
 				if (projectiles.get(i).x > SpeederGame.WIDTH) {
 					projectiles.get(i).active = false;
 					
+				}
+				else if (enemy.active==false) {
+					projectiles.get(i).active = false;
 				}
 			}
 			checkCollision();
@@ -60,7 +68,7 @@ public class ObjectManager implements ActionListener {
 		
 		for (int i = 0; i < projectiles.size(); i++) {
 			projectiles.get(i).draw(g);
-			System.out.println("draw");
+		
 		}
 	}
 
@@ -70,10 +78,11 @@ public class ObjectManager implements ActionListener {
 	
 			for(int i=0; i < projectiles.size(); i++) {
 		
-				if (enemy.y >= projectiles.get(i).y && enemy.y <= (projectiles.get(i).y+projectiles.get(i).height) && enemy.x >= projectiles.get(i).x && enemy.x <= (projectiles.get(i).x+projectiles.get(i).width)) {
+				if (enemy.y >= projectiles.get(i).y && enemy.y <= (projectiles.get(i).y-projectiles.get(i).height) && enemy.x >= projectiles.get(i).x && enemy.x <= (projectiles.get(i).x+projectiles.get(i).width)) {
 					System.out.println(" if dead");
 				
 					enemy.active=false;
+					
 				}
 			}
 		

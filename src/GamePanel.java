@@ -160,6 +160,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 			if (currentState == END) {
 				speeder = new Speeder(250, 750, 50, 50);
+				objectManager = new ObjectManager(speeder);
 				currentState = MENU;
 			} else {
 				currentState++;
@@ -179,7 +180,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 				speeder.right();
 			}
 			if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-				System.out.println("space");
+
 				objectManager.addProjectile(speeder.getProjectile());
 				//speeder.addProjectile(new Projectile(speeder.x, speeder.y, speeder.height,speeder.width));
 			}
