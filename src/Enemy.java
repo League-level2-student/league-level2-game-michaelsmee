@@ -25,11 +25,11 @@ public class Enemy extends GameObject{
 
 	void draw(Graphics g) {
 
-		if (gotImage) {
+		if (gotImage && active) {
 			g.setColor(Color.YELLOW);
 			g.drawRect(x, y, width, height);
 			g.drawImage(image, x, y, width, height, null);
-		} else {
+		} else if (active){
 			g.setColor(Color.BLUE);
 			g.fillRect(x, y, width, height);
 		}

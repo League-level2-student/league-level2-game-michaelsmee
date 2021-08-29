@@ -29,8 +29,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	int barrierX = 800;
 	int barrierY = 0;
 	Speeder speeder = new Speeder(250, 250, 50, 50);
-	ObjectManager objectManager= new ObjectManager(speeder); 
 	Enemy enemy = new Enemy(barrierX,250,15,20);
+	ObjectManager objectManager= new ObjectManager(speeder, enemy); 
+	
 	int upperHeight = 100;
 	int Gap = 200;
 	int lowerY = upperHeight + Gap;
@@ -160,7 +161,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 			if (currentState == END) {
 				speeder = new Speeder(250, 750, 50, 50);
-				objectManager = new ObjectManager(speeder);
+				enemy = new Enemy(barrierX,250,15,20);
+				objectManager = new ObjectManager(speeder, enemy);
 				currentState = MENU;
 			} else {
 				currentState++;
@@ -234,6 +236,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			enemy.x=SpeederGame.WIDTH;
 			Random ran = new Random();
 			enemy.y=ran.nextInt(150)+upperHeight;
+			enemy.active=true;
 		}
 
 	}
@@ -255,7 +258,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		}
 	void enemyIntersect() {
 		
-		if (enemy.y >= speeder.y && enemy.y <= (speeder.y+speeder.height) && enemy.x >= speeder.x && enemy.x <= (speeder.x+speeder.width)) {
+		if (enemy.y >= speeder.y && enemy.y <= (speeder.y+speeder.height) && enemy.x >= speeder.x && enemy.x <= (speeder.x+speeder.width) && enemy.active) {
 			System.out.println(" if dead");
 		
 			currentState = END;
