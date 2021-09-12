@@ -24,8 +24,8 @@ public class Speeder extends GameObject {
 	
 	void draw(Graphics g){
 		if (gotImage) {
-			g.setColor(Color.PINK);
-			g.drawRect(x, y, width, height);
+			//g.setColor(Color.PINK);
+			//g.drawRect(x, y, width, height);
 			g.drawImage(image, x, y, width, height, null);
 			
 		} else {

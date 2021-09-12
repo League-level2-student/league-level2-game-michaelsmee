@@ -160,7 +160,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		// TODO Auto-generated method stub
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 			if (currentState == END) {
-				speeder = new Speeder(250, 750, 50, 50);
+				speeder = new Speeder(250, 250, 50, 50);
 				enemy = new Enemy(barrierX,250,15,20);
 				objectManager = new ObjectManager(speeder, enemy);
 				currentState = MENU;
